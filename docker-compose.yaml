@@ -1,0 +1,36 @@
+#Written by Dario Mader 
+#Github https://github.com/darox
+#Date: 22.08.2020
+
+version: '3.8'
+services:
+  grafana:
+    image: "grafana/grafana"
+    volumes:
+      - type: bind
+        source: ./grafana/var
+        target: /var/lib/grafana
+      - type: bind
+        source: ./grafana/etc
+        target: /etc/grafana
+    user: "root"
+    ports:
+      - "127.0.0.1:3333:3000"
+  influxdb:
+    image: "influxdb"
+    ports:
+      - "127.0.0.1:8086:8086"
+    volumes:
+      - type: bind
+        source: ./influxdb/var
+        target: /var/lib/influxdb
+      - type: bind
+        source: ./influxdb/etc
+        target: /etc/influxdb
+  ntop:
+    network_mode: host
+    build: ./ntopng
+    volumes:
+      - type: bind
+        source: ./ntopng/var
+        target: /var/lib/ntopng
