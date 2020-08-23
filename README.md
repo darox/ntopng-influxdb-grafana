@@ -9,7 +9,6 @@
 
 ```
 docker-compose up -d
-
 ```
 
 ## Switch to Influxdb as Time Series DB
